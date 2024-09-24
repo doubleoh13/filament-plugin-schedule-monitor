@@ -11,7 +11,10 @@ use Spatie\ScheduleMonitor\Models\MonitoredScheduledTask;
 
 class MonitoredScheduledTaskResource extends Resource
 {
-    protected static ?string $model = MonitoredScheduledTask::class;
+    public static function getModel(): string
+    {
+        return config('schedule-monitor.models.monitored_scheduled_task');
+    }
 
     public static function getNavigationGroup(): ?string
     {

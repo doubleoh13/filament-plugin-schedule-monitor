@@ -15,9 +15,12 @@ use Spatie\ScheduleMonitor\Models\MonitoredScheduledTaskLogItem;
 
 class MonitoredScheduledTaskLogItemResource extends Resource
 {
-    protected static ?string $model = MonitoredScheduledTaskLogItem::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    public static function getModel(): string
+    {
+        return config('schedule-monitor.models.monitored_scheduled_log_item');
+    }
 
     public static function getNavigationGroup(): ?string
     {
@@ -107,7 +110,7 @@ class MonitoredScheduledTaskLogItemResource extends Resource
                     ->label(__('filament-schedule-monitor::translations.name'))
                     ->multiple()
                     ->options(
-                        MonitoredScheduledTask::all()->pluck('name', 'id')
+                        MonitoredScheduledTaskResource::getModel()::all()->pluck('name', 'id')
                     ),
             ])
             ->filtersLayout(Tables\Enums\FiltersLayout::AboveContent);
